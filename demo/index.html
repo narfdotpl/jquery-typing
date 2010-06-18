@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta content='text/html;charset=utf-8' http-equiv='content-type' />
+    <title>jQuery-typing</title>
+    <link href='reset.css' rel='stylesheet' type='text/css' />
+    <style type='text/css'>
+      body {
+        font-family: "Lucida Grande", Lucida, Arial, sans-serif;
+        font-size: 15px;
+        line-height: 1.3em; }
+      
+      #content {
+        width: 600px;
+        margin: 0 auto;
+        padding-bottom: 1.3em; }
+      
+      h1, h2 {
+        font-weight: bold; }
+      
+      h1 {
+        font-size: 2.18em;
+        padding-top: 1.063em;
+        padding-bottom: 0.657em; }
+      
+      h2 {
+        font-size: 1.18em;
+        padding-top: 0.878em;
+        padding-bottom: 0.542em; }
+      
+      p {
+        margin-bottom: 1.3em;
+        text-align: justify; }
+      
+      code {
+        font-family: Monaco, monospace; }
+      
+      pre code {
+        display: block;
+        margin: 1.3em 0 1.3em 4ex; }
+      
+      table {
+        margin-bottom: 1.3em;
+        border-bottom: solid;
+        border-top: solid;
+        border-width: 2px; }
+        table thead th {
+          font-weight: normal;
+          padding: 2px;
+          /* assigning border to thead didn't seem to work */
+          border-bottom: solid;
+          border-width: 1px; }
+        table th, table td {
+          width: 100px;
+          text-align: center;
+          vertical-align: middle;
+          padding: 1px 2px 0 2px; }
+        table th.wide, table input, table textarea {
+          width: 200px; }
+    </style>
+  </head>
+  <body>
+    <script type='text/javascript'>
+      //<![CDATA[
+        var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-8752416-2']);
+          _gaq.push(['_trackPageview']);
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+          })();
+      //]]>
+    </script>
+    <a href="http://github.com/narfdotpl/jquery-typing"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" /></a>
+    <div id='content'>
+      <h1>jQuery-typing</h1>
+      <p>Assign callbacks for started/stopped typing events.</p>
+      <h2>Usage</h2>
+      <pre><code>$(&#39;:text&#39;).first().typing({&#x000A;    start: function () {$(&#39;body&#39;).css(&#39;color&#39;, &#39;red&#39;);},&#x000A;    stop: function () {$(&#39;body&#39;).css(&#39;color&#39;, &#39;blue&#39;);},&#x000A;    delay: 400&#x000A;});</code></pre>
+      
+      <p><code>typing</code> command takes key-value object with <code>start</code>, <code>stop</code> and <code>delay</code> keys. They are all optional, so you can either pass only <code>start</code> callback, <code>stop</code> callback, <code>stop</code> callback and <code>delay</code> time, or everything.</p>
+      
+      <p><code>delay</code> is amount of time the plugin waits for another keypress before judging that typing has stopped; it is expressed in milliseconds and defaults to 400.</p>
+      <h2>Demo</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>type</th>
+            <th class='wide'>element</th>
+            <th>started</th>
+            <th>stopped</th>
+            <th>delay [ms]</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>text</td>
+            <td>
+              <input autofocus='autofocus' type='text' />
+            </td>
+            <td class='started'></td>
+            <td class='stopped'></td>
+            <td class='delay'>400</td>
+          </tr>
+          <tr>
+            <td>text</td>
+            <td>
+              <input type='text' />
+            </td>
+            <td class='started'></td>
+            <td class='stopped'></td>
+            <td class='delay'>1000</td>
+          </tr>
+          <tr>
+            <td>textarea</td>
+            <td>
+              <textarea rows='3'></textarea>
+            </td>
+            <td class='started'></td>
+            <td class='stopped'></td>
+            <td class='delay'>0</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>Download</h2>
+      <p>Get production version from <a href='http://narf.pl/jquery-typing/jquery.typing.min.js'>http://narf.pl/jquery-typing/jquery.typing.min.js</a></p>
+      
+      <p>For development version visit <a href='http://github.com/narfdotpl/jquery-typing'>GitHub</a>.</p>
+    </div>
+    <script src='jquery-1.4.2.min.js' type='text/javascript'></script>
+    <script src='jquery.typing.min.js?1277028199' type='text/javascript'></script>
+    <script type='text/javascript'>
+      //<![CDATA[
+        $(function () {
+          // add typing handlers
+          $('tbody tr').each(function () {
+            var $tr = $(this),
+                $input = $tr.find(':input'),
+                delay = $tr.find('.delay').text();
+        
+            $input.typing({
+              start: function () {
+                $tr.find('.started').text('✘');
+                $tr.find('.stopped').text('');
+              },
+              stop: function () {
+                $tr.find('.started').text('');
+                $tr.find('.stopped').text('✘');
+              },
+              delay: delay
+            });
+          });
+        });
+      //]]>
+    </script>
+  </body>
+</html>

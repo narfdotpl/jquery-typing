@@ -23,6 +23,12 @@ judging that typing has stopped; it is expressed in milliseconds and
 defaults to 400.
 
 
+Demo
+----
+
+Visit <http://narf.pl/jquery-typing/>
+
+
 Download
 --------
 

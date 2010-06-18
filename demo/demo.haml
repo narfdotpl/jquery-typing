@@ -1,0 +1,221 @@
+!!! 5
+%html(lang='en')
+  %head
+    %meta(http-equiv='content-type' content='text/html;charset=utf-8')/
+    %title jQuery-typing
+
+    -#---------
+    -#  style
+    -#---------
+
+    %link(rel='stylesheet' href='reset.css' type='text/css')
+    %style(type='text/css')
+      :sass
+        $width: 600px
+        $font-size: 15px
+
+        $line-height: 1.3em
+        $top: 1.618 / 2.618
+        $bottom: 1 / 2.618
+
+        $column: $width / 6
+        $column-wide: $column * 2
+
+
+        body
+          font:
+            family: 'Lucida Grande', Lucida, Arial, sans-serif
+            size: $font-size
+          line-height: $line-height
+
+
+        #content
+          width: $width
+          margin: 0 auto
+          padding-bottom: $line-height
+
+
+        h1, h2
+          font-weight: bold
+
+        h1
+          $fs: 2.18em
+          $p: (3 * $line-height - $fs)
+
+          font-size: $fs
+          padding:
+            top: $top * $p
+            bottom: $bottom * $p
+
+        h2
+          $fs: 1.18em
+          $p: (2 * $line-height - $fs)
+
+          font-size: $fs
+          padding:
+            top: $top * $p
+            bottom: $bottom * $p
+
+
+        p
+          margin-bottom: $line-height
+          text-align: justify
+
+
+        code
+          font-family: Monaco, monospace
+
+        pre code
+          display: block
+          margin: $line-height 0 $line-height 4ex
+
+
+        table
+          margin-bottom: $line-height
+          border:
+            bottom: solid
+            top: solid
+            width: 2px
+
+          thead th
+            font-weight: normal
+            padding: 2px
+
+            /* assigning border to thead didn't seem to work */
+            border:
+              bottom: solid
+              width: 1px
+
+          th, td
+            width: $column
+            text-align: center
+            vertical-align: middle
+            padding: 1px 2px 0 2px
+
+          th.wide, input, textarea
+            width: $column-wide
+
+
+  %body
+
+    -#--------------------
+    -#  Google Analytics
+    -#--------------------
+
+    :javascript
+      var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-8752416-2']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+        })();
+
+    -#-----------------
+    -#  GitHub ribbon
+    -#-----------------
+
+    <a href="http://github.com/narfdotpl/jquery-typing"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" /></a>
+
+
+    -#-----------
+    -#  content
+    -#-----------
+
+    #content
+
+      %h1 jQuery-typing
+      %p Assign callbacks for started/stopped typing events.
+
+
+      %h2 Usage
+      :markdown
+
+            $(':text').first().typing({
+                start: function () {$('body').css('color', 'red');},
+                stop: function () {$('body').css('color', 'blue');},
+                delay: 400
+            });
+
+        `typing` command takes key-value object with `start`, `stop` and
+        `delay` keys. They are all optional, so you can either pass only
+        `start` callback, `stop` callback, `stop` callback and `delay` time,
+        or everything.
+
+        `delay` is amount of time the plugin waits for another keypress before
+        judging that typing has stopped; it is expressed in milliseconds and
+        defaults to 400.
+
+
+      %h2 Demo
+      %table
+        %thead
+          %tr
+            %th type
+            %th.wide element
+            %th started
+            %th stopped
+            %th delay [ms]
+        %tbody
+          %tr
+            %td text
+            %td
+              %input(type='text' autofocus)
+            %td.started
+            %td.stopped
+            %td.delay 400
+          %tr
+            %td text
+            %td
+              %input(type='text')
+            %td.started
+            %td.stopped
+            %td.delay 1000
+          %tr
+            %td textarea
+            %td
+              %textarea(rows='3')
+            %td.started
+            %td.stopped
+            %td.delay 0
+
+
+      %h2 Download
+      :markdown
+        Get production version from
+        <http://narf.pl/jquery-typing/jquery.typing.min.js>
+
+        For development version visit [GitHub][].
+
+          [GitHub]: http://github.com/narfdotpl/jquery-typing
+
+
+    -#-----------
+    -#  scripts
+    -#-----------
+
+    - epoch_time = Time.now.to_i
+    %script(src='jquery-1.4.2.min.js' type='text/javascript')
+    %script(src='jquery.typing.min.js?#{epoch_time}' type='text/javascript')
+    :javascript
+      $(function () {
+        // add typing handlers
+        $('tbody tr').each(function () {
+          var $tr = $(this),
+              $input = $tr.find(':input'),
+              delay = $tr.find('.delay').text();
+
+          $input.typing({
+            start: function () {
+              $tr.find('.started').text('✘');
+              $tr.find('.stopped').text('');
+            },
+            stop: function () {
+              $tr.find('.started').text('');
+              $tr.find('.stopped').text('✘');
+            },
+            delay: delay
+          });
+        });
+      });
