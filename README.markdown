@@ -43,8 +43,10 @@ For development version visit [GitHub][].
 Meta
 ----
 
-jQuery-typing is written by [Maciej Konieczny][].  Everything in
-`plugin/` directory is released into the [public domain][].
+jQuery-typing is written by [Maciej Konieczny][] and uses
+[semantic versioning][] for release numbering.  Everything in `plugin/`
+directory is released into the [public domain][].
 
   [Maciej Konieczny]: http://narf.pl/
+  [semantic versioning]: http://semver.org/
   [public domain]: http://unlicense.org/
