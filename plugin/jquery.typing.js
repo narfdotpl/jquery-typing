@@ -1,3 +1,9 @@
+// jQuery-typing
+//
+// Website: http://narf.pl/jquery-typing/
+// License: public domain <http://unlicense.org/>
+// Author:  Maciej Konieczny <hello@narf.pl>
+
 (function ($) {
 
     //--------------------

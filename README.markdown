@@ -38,3 +38,13 @@ Get production version from
 For development version visit [GitHub][].
 
   [GitHub]: http://github.com/narfdotpl/jquery-typing
+
+
+Meta
+----
+
+jQuery-typing is written by [Maciej Konieczny][].  Everything in
+`plugin/` directory is released into the [public domain][].
+
+  [Maciej Konieczny]: http://narf.pl/
+  [public domain]: http://unlicense.org/

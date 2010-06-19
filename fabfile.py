@@ -12,6 +12,9 @@ from os.path import dirname, join, realpath
 from fabric.api import local
 
 
+__author__ = 'Maciej Konieczny <hello@narf.pl>'
+
+
 REPO_DIR = dirname(realpath(__file__))
 DEMO_DIR = join(REPO_DIR, 'demo')
 PLUGIN_DIR = join(REPO_DIR, 'plugin')
@@ -35,8 +38,24 @@ def compress():
     Create compressed version of the plugin.
     """
 
+    # compress
     local('java -jar {0} --js={1} --js_output_file={2}'.format(
           COMPILER_PATH, PLUGIN_PATH, COMPRESSED_PLUGIN_PATH))
+
+    # copy info comment from development version
+    info = ''
+    with open(PLUGIN_PATH) as f:
+        for line in f:
+            if line.startswith('//'):
+                info += line
+
+    # add info comment to compressed version
+    if info:
+        with open(COMPRESSED_PLUGIN_PATH) as f:
+            compressed = f.read()
+
+        with open(COMPRESSED_PLUGIN_PATH, 'w') as f:
+            f.write(info + compressed)
 
 
 def demo():
