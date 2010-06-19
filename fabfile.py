@@ -9,7 +9,7 @@ and Haml.
 
 from os.path import dirname, join, realpath
 
-from fabric.api import local
+from fabric.api import cd, env, local, put, run
 
 
 __author__ = 'Maciej Konieczny <hello@narf.pl>'
@@ -22,6 +22,9 @@ PLUGIN_DIR = join(REPO_DIR, 'plugin')
 COMPILER_PATH = join(REPO_DIR, 'closure-compiler/compiler.jar')
 PLUGIN_PATH = join(PLUGIN_DIR, 'jquery.typing.js')
 COMPRESSED_PLUGIN_PATH = join(PLUGIN_DIR, 'jquery.typing.min.js')
+
+
+env.hosts = ['narf.megiteam.pl']
 
 
 def build():
@@ -70,3 +73,51 @@ def demo():
     haml = join(DEMO_DIR, 'demo.haml')
     html = join(DEMO_DIR, 'index.html')
     local('haml {0} > {1}'.format(haml, html))
+
+
+def deploy():
+    """
+    Update MegiTeam and push to GitHub.
+    """
+
+    # update MegiTeam
+    megi()
+
+    # push to GitHub
+    local('git push --tags')
+
+
+def megi():
+    """
+    Update MegiTeam.
+    """
+
+    # archive demo
+    archive_name = 'typing.tar.bz2'
+    archive_path = '/tmp/' + archive_name
+    with cd(DEMO_DIR):
+        local('tar -cj --exclude *.haml -f {0} *'.format(archive_path))
+
+    # set remote directory names
+    main_dir = 'narf.pl/main/on-the-stage'
+    typing_dir_name = 'jquery-typing'
+    typing_dir = join(main_dir, typing_dir_name)
+
+    # create jQuery-typing directory
+    with cd(main_dir):
+        run("""if [ -d {0} ]; then
+                rm -rf {0}/*
+            else
+                mkdir {0}
+            fi""".format(typing_dir_name))
+
+    # upload
+    put(archive_path, typing_dir)
+
+    # extract and remove remote archive
+    with cd(typing_dir):
+        run('tar xf ' + archive_name)
+        run('rm ' + archive_name)
+
+    # remove local archive
+    local('rm ' + archive_path)
