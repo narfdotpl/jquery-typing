@@ -51,6 +51,8 @@ def compress():
         for line in f:
             if line.startswith('//'):
                 info += line
+            else:
+                break
 
     # add info comment to compressed version
     if info:
@@ -84,6 +86,7 @@ def deploy():
     megi()
 
     # push to GitHub
+    local('git push')
     local('git push --tags')
 
 
