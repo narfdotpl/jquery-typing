@@ -20,8 +20,11 @@ REPO_DIR = dirname(realpath(__file__))
 DEMO_DIR = join(REPO_DIR, 'demo')
 DEMO_SOURCE_DIR = join(REPO_DIR, 'demo-source')
 PLUGIN_DIR = join(REPO_DIR, 'plugin')
+TOOLS_DIR = join(REPO_DIR, 'tools')
 
-COMPILER_PATH = join(REPO_DIR, 'closure-compiler/compiler.jar')
+COMPILER_PATH = join(TOOLS_DIR, 'closure-compiler/compiler.jar')
+YUICOMPRESSOR_PATH = join(TOOLS_DIR,
+                          'yuicompressor/build/yuicompressor-2.4.2.jar')
 PLUGIN_PATH = join(PLUGIN_DIR, 'jquery.typing-{0}.js'.format(VERSION))
 COMPRESSED_PLUGIN_PATH = join(PLUGIN_DIR,
                               'jquery.typing-{0}.min.js'.format(VERSION))
@@ -104,6 +107,9 @@ def demo_css():
 
     # render sass
     local('sass {0} >> {1}'.format(style, output))
+
+    # compress css
+    local('java -jar {0} -o {1} {1}'.format(YUICOMPRESSOR_PATH, output))
 
 
 def deploy():
