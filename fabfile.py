@@ -18,6 +18,7 @@ VERSION = '0.2.0dev'
 
 REPO_DIR = dirname(realpath(__file__))
 DEMO_DIR = join(REPO_DIR, 'demo')
+DEMO_SOURCE_DIR = join(REPO_DIR, 'demo-source')
 PLUGIN_DIR = join(REPO_DIR, 'plugin')
 
 COMPILER_PATH = join(REPO_DIR, 'closure-compiler/compiler.jar')
@@ -79,8 +80,13 @@ def demo():
     # copy compressed plugin
     local('cp {0} {1}'.format(COMPRESSED_PLUGIN_PATH, DEMO_DIR))
 
+    # copy style
+    reset = join(DEMO_SOURCE_DIR, 'reset.css')
+    output = join(DEMO_DIR, 'style.css')
+    local('cp {0} {1}'.format(reset, output))
+
     # render haml
-    haml = join(DEMO_DIR, 'demo.haml')
+    haml = join(DEMO_SOURCE_DIR, 'index.haml')
     html = join(DEMO_DIR, 'index.html')
     local('haml {0} > {1}'.format(haml, html))
 
