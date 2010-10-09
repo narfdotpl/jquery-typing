@@ -18,6 +18,13 @@
     %script(src='jquery.typing-#{version}.min.js' type='text/javascript')
     :javascript
       $(function () {
+        // focus on first input if user can see it without scrolling
+        var $input = $(':text').first();
+        if ($input.offset().top + $input.height() < $(window).height()) {
+          $input.focus();
+        }
+
+        // assign typing handlers
         $('tbody tr').each(function (i, tr) {
           var $tr = $(tr),
               $input = $tr.find(':input'),
@@ -115,7 +122,7 @@
           %tr
             %td text
             %td
-              %input(type='text' autofocus)
+              %input(type='text')
             %td.in-progress JavaScript disabled
             %td.delay 400
           %tr

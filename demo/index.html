@@ -9,6 +9,13 @@
     <script type='text/javascript'>
       //<![CDATA[
         $(function () {
+          // focus on first input if user can see it without scrolling
+          var $input = $(':text').first();
+          if ($input.offset().top + $input.height() < $(window).height()) {
+            $input.focus();
+          }
+        
+          // assign typing handlers
           $('tbody tr').each(function (i, tr) {
             var $tr = $(tr),
                 $input = $tr.find(':input'),
@@ -71,7 +78,7 @@
           <tr>
             <td>text</td>
             <td>
-              <input autofocus='autofocus' type='text' />
+              <input type='text' />
             </td>
             <td class='in-progress'>JavaScript disabled</td>
             <td class='delay'>400</td>
