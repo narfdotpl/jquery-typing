@@ -5,6 +5,7 @@
 
     %title jQuery-typing
     - version = '0.2.0dev'
+    - version_h1 = 'v0.2dev'
 
     %link(rel='stylesheet' href='style.css' type='text/css')
 
@@ -38,7 +39,10 @@
 
     #content
 
-      %h1 jQuery-typing
+      %h1
+        jQuery-typing
+        %span.version #{version_h1}
+
       %p Assign callbacks for started/stopped typing events.
 
 
