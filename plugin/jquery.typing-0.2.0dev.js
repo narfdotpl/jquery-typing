@@ -36,12 +36,12 @@
             delayedCallback;
 
         // start typing
-        function startTyping() {
+        function startTyping(event) {
             if (!typing) {
                 // set flag and run callback
                 typing = true;
                 if (settings.start) {
-                    settings.start();
+                    settings.start(event, $elem);
                 }
             }
         }
@@ -55,7 +55,7 @@
                     // set flag and run callback
                     typing = false;
                     if (settings.stop) {
-                        settings.stop();
+                        settings.stop(event, $elem);
                     }
                 }, delay >= 0 ? delay : settings.delay);
             }
@@ -67,7 +67,7 @@
         // listen to backspace and delete presses
         $elem.keydown(function (event) {
             if (event.keyCode === 8 || event.keyCode === 46) {
-                startTyping();
+                startTyping(event);
             }
         });
 

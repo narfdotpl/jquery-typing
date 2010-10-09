@@ -50,11 +50,13 @@
       </h1>
       <p>Assign callbacks for started/stopped typing events.</p>
       <h2>Usage</h2>
-      <pre><code>$(&#39;:text&#39;).first().typing({&#x000A;    start: function () {$(&#39;body&#39;).css(&#39;color&#39;, &#39;red&#39;);},&#x000A;    stop: function () {$(&#39;body&#39;).css(&#39;color&#39;, &#39;blue&#39;);},&#x000A;    delay: 400&#x000A;});</code></pre>
+      <pre><code>$(&#39;:text&#39;).typing({&#x000A;    start: function (event, $elem) {&#x000A;        $elem.css(&#39;background&#39;, &#39;#fa0&#39;);&#x000A;    },&#x000A;    stop: function (event, $elem) {&#x000A;        $elem.css(&#39;background&#39;, &#39;#f00&#39;);&#x000A;    },&#x000A;    delay: 400&#x000A;});</code></pre>
       
       <p><code>typing</code> command takes key-value object with <code>start</code>, <code>stop</code> and <code>delay</code> keys. They are all optional, so you can either pass only <code>start</code> callback, <code>stop</code> callback, <code>stop</code> callback and <code>delay</code> time, or everything.</p>
       
       <p><code>delay</code> is amount of time the plugin waits for another keypress before judging that typing has stopped; it is expressed in milliseconds and defaults to 400. Regardless of <code>delay</code>&#8217;s value, the <code>stop</code> callback is called immediately when blur event occurs.</p>
+      
+      <p>Callbacks are passed two arguments: event that caused callback execution and jQuery object for matched element. Possible events are <code>keypress</code> or <code>keydown</code> for <code>start</code> callbacks and <code>keyup</code> or <code>blur</code> for <code>stop</code> callbacks.</p>
       <h2>Demo</h2>
       <table>
         <thead>

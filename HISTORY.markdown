@@ -10,6 +10,9 @@ for [full history][].
 [v0.2dev][]
 -----------
 
+  - Added callback arguments support.  They are passed two things: event
+    that caused callback execution and jQuery object for matched element.
+
   - Added blur support.
 
 

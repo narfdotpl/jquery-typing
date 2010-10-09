@@ -7,9 +7,13 @@ Assign callbacks for started/stopped typing events.
 Usage
 -----
 
-    $(':text').first().typing({
-        start: function () {$('body').css('color', 'red');},
-        stop: function () {$('body').css('color', 'blue');},
+    $(':text').typing({
+        start: function (event, $elem) {
+            $elem.css('background', '#fa0');
+        },
+        stop: function (event, $elem) {
+            $elem.css('background', '#f00');
+        },
         delay: 400
     });
 
@@ -22,6 +26,11 @@ or everything.
 judging that typing has stopped; it is expressed in milliseconds and
 defaults to 400. Regardless of `delay`'s value, the `stop` callback is
 called immediately when blur event occurs.
+
+Callbacks are passed two arguments: event that caused callback execution
+and jQuery object for matched element. Possible events are `keypress`
+or `keydown` for `start` callbacks and `keyup` or `blur` for `stop`
+callbacks.
 
 
 Demo
