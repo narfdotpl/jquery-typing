@@ -71,30 +71,26 @@
           %tr
             %th type
             %th.wide element
-            %th started
-            %th stopped
+            %th.wide typing in progress
             %th delay [ms]
         %tbody
           %tr
             %td text
             %td
               %input(type='text' autofocus)
-            %td.started
-            %td.stopped
+            %td.in-progress JavaScript disabled
             %td.delay 400
           %tr
             %td text
             %td
               %input(type='text')
-            %td.started
-            %td.stopped
+            %td.in-progress JavaScript disabled
             %td.delay 1000
           %tr
             %td textarea
             %td
               %textarea(rows='3')
-            %td.started
-            %td.stopped
+            %td.in-progress JavaScript disabled
             %td.delay 0
 
 
@@ -127,21 +123,19 @@
     %script(src='jquery.typing-#{version}.min.js' type='text/javascript')
     :javascript
       $(function () {
-        // add typing handlers
-        $('tbody tr').each(function () {
-          var $tr = $(this),
+        $('tbody tr').each(function (i, tr) {
+          var $tr = $(tr),
               $input = $tr.find(':input'),
-              delay = $tr.find('.delay').text();
+              delay = $tr.find('.delay').text(),
+              $inProgress = $tr.find('.in-progress'),
+              $dot = $('<span class="bright">&#x25CF;</span>');
+
+          $inProgress.empty();
+          $dot.appendTo($inProgress);
 
           $input.typing({
-            start: function () {
-              $tr.find('.started').text('✘');
-              $tr.find('.stopped').text('');
-            },
-            stop: function () {
-              $tr.find('.started').text('');
-              $tr.find('.stopped').text('✘');
-            },
+            start: function () {$dot.removeClass('bright')},
+            stop: function () {$dot.addClass('bright')},
             delay: delay
           });
         });

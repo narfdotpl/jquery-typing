@@ -37,8 +37,7 @@
           <tr>
             <th>type</th>
             <th class='wide'>element</th>
-            <th>started</th>
-            <th>stopped</th>
+            <th class='wide'>typing in progress</th>
             <th>delay [ms]</th>
           </tr>
         </thead>
@@ -48,8 +47,7 @@
             <td>
               <input autofocus='autofocus' type='text' />
             </td>
-            <td class='started'></td>
-            <td class='stopped'></td>
+            <td class='in-progress'>JavaScript disabled</td>
             <td class='delay'>400</td>
           </tr>
           <tr>
@@ -57,8 +55,7 @@
             <td>
               <input type='text' />
             </td>
-            <td class='started'></td>
-            <td class='stopped'></td>
+            <td class='in-progress'>JavaScript disabled</td>
             <td class='delay'>1000</td>
           </tr>
           <tr>
@@ -66,8 +63,7 @@
             <td>
               <textarea rows='3'></textarea>
             </td>
-            <td class='started'></td>
-            <td class='stopped'></td>
+            <td class='in-progress'>JavaScript disabled</td>
             <td class='delay'>0</td>
           </tr>
         </tbody>
@@ -84,21 +80,19 @@
     <script type='text/javascript'>
       //<![CDATA[
         $(function () {
-          // add typing handlers
-          $('tbody tr').each(function () {
-            var $tr = $(this),
+          $('tbody tr').each(function (i, tr) {
+            var $tr = $(tr),
                 $input = $tr.find(':input'),
-                delay = $tr.find('.delay').text();
+                delay = $tr.find('.delay').text(),
+                $inProgress = $tr.find('.in-progress'),
+                $dot = $('<span class="bright">&#x25CF;</span>');
+        
+            $inProgress.empty();
+            $dot.appendTo($inProgress);
         
             $input.typing({
-              start: function () {
-                $tr.find('.started').text('✘');
-                $tr.find('.stopped').text('');
-              },
-              stop: function () {
-                $tr.find('.started').text('');
-                $tr.find('.stopped').text('✘');
-              },
+              start: function () {$dot.removeClass('bright')},
+              stop: function () {$dot.addClass('bright')},
               delay: delay
             });
           });
