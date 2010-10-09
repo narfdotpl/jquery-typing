@@ -47,7 +47,7 @@
         }
 
         // stop typing
-        function stopTyping() {
+        function stopTyping(event, delay) {
             if (typing) {
                 // discard previous delayed callback and create new one
                 clearTimeout(delayedCallback);
@@ -57,7 +57,7 @@
                     if (settings.stop) {
                         settings.stop();
                     }
-                }, settings.delay);
+                }, delay >= 0 ? delay : settings.delay);
             }
         }
 
@@ -73,5 +73,10 @@
 
         // listen to keyups
         $elem.keyup(stopTyping);
+
+        // listen to blurs
+        $elem.blur(function (event) {
+            stopTyping(event, 0);
+        });
     }
 })(jQuery);

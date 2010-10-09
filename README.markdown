@@ -20,7 +20,8 @@ or everything.
 
 `delay` is amount of time the plugin waits for another keypress before
 judging that typing has stopped; it is expressed in milliseconds and
-defaults to 400.
+defaults to 400. Regardless of `delay`'s value, the `stop` callback is
+called immediately when blur event occurs.
 
 
 Demo

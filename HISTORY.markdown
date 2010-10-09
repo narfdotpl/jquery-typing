@@ -10,6 +10,8 @@ for [full history][].
 [v0.2dev][]
 -----------
 
+  - Added blur support.
+
 
 [v0.1][]
 --------

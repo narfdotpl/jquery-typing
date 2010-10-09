@@ -54,7 +54,7 @@
       
       <p><code>typing</code> command takes key-value object with <code>start</code>, <code>stop</code> and <code>delay</code> keys. They are all optional, so you can either pass only <code>start</code> callback, <code>stop</code> callback, <code>stop</code> callback and <code>delay</code> time, or everything.</p>
       
-      <p><code>delay</code> is amount of time the plugin waits for another keypress before judging that typing has stopped; it is expressed in milliseconds and defaults to 400.</p>
+      <p><code>delay</code> is amount of time the plugin waits for another keypress before judging that typing has stopped; it is expressed in milliseconds and defaults to 400. Regardless of <code>delay</code>&#8217;s value, the <code>stop</code> callback is called immediately when blur event occurs.</p>
       <h2>Demo</h2>
       <table>
         <thead>
