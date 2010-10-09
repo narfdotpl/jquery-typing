@@ -12,8 +12,8 @@
     //--------------------
 
     $.fn.typing = function (options) {
-        return this.each(function () {
-            listenToTyping(this, options);
+        return this.each(function (i, elem) {
+            listenToTyping(elem, options);
         });
     };
 
@@ -35,8 +35,8 @@
             typing = false,
             delayedCallback;
 
-        // react to keypresses
-        function reactToKeypress() {
+        // start typing
+        function startTyping() {
             if (!typing) {
                 // set flag and run callback
                 typing = true;
@@ -46,18 +46,8 @@
             }
         }
 
-        // listen to regular keypresses
-        $elem.keypress(reactToKeypress);
-
-        // listen to backspace and delete presses
-        $elem.keydown(function (event) {
-            if (event.keyCode === 8 || event.keyCode === 46) {
-                reactToKeypress();
-            }
-        });
-
-        // listen to keyup events
-        $elem.keyup(function () {
+        // stop typing
+        function stopTyping() {
             if (typing) {
                 // discard previous delayed callback and create new one
                 clearTimeout(delayedCallback);
@@ -69,6 +59,19 @@
                     }
                 }, settings.delay);
             }
+        }
+
+        // listen to regular keypresses
+        $elem.keypress(startTyping);
+
+        // listen to backspace and delete presses
+        $elem.keydown(function (event) {
+            if (event.keyCode === 8 || event.keyCode === 46) {
+                startTyping();
+            }
         });
+
+        // listen to keyups
+        $elem.keyup(stopTyping);
     }
 })(jQuery);
