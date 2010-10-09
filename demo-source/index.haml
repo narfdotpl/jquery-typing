@@ -2,106 +2,11 @@
 %html(lang='en')
   %head
     %meta(http-equiv='content-type' content='text/html;charset=utf-8')/
+
     %title jQuery-typing
-
-    -#-----------
-    -#  version
-    -#-----------
-
     - version = '0.2.0dev'
 
-
-    -#---------
-    -#  style
-    -#---------
-
     %link(rel='stylesheet' href='style.css' type='text/css')
-    %style(type='text/css')
-      :sass
-        $width: 600px
-        $font-size: 15px
-
-        $line-height: 1.3em
-        $top: 1.618 / 2.618
-        $bottom: 1 / 2.618
-
-        $column: $width / 6
-        $column-wide: $column * 2
-
-
-        body
-          font:
-            family: 'Lucida Grande', Lucida, Arial, sans-serif
-            size: $font-size
-          line-height: $line-height
-
-
-        #content
-          width: $width
-          margin: 0 auto
-          padding-bottom: $line-height
-
-
-        h1, h2
-          font-weight: bold
-
-        h1
-          $fs: 2.18em
-          $p: (3 * $line-height - $fs)
-
-          font-size: $fs
-          padding:
-            top: $top * $p
-            bottom: $bottom * $p
-
-        h2
-          $fs: 1.18em
-          $p: (2 * $line-height - $fs)
-
-          font-size: $fs
-          padding:
-            top: $top * $p
-            bottom: $bottom * $p
-
-
-        p
-          margin-bottom: $line-height
-          text-align: justify
-
-
-        code
-          font-family: Monaco, monospace
-
-        pre code
-          display: block
-          margin: $line-height 0 $line-height 4ex
-
-
-        table
-          margin-bottom: $line-height
-          border:
-            bottom: solid
-            top: solid
-            width: 2px
-
-          thead th
-            font-weight: normal
-            padding: 2px
-
-            /* assigning border to thead didn't seem to work */
-            border:
-              bottom: solid
-              width: 1px
-
-          th, td
-            width: $column
-            text-align: center
-            vertical-align: middle
-            padding: 1px 2px 0 2px
-
-          th.wide, input, textarea
-            width: $column-wide
-
 
   %body
 
@@ -118,6 +23,7 @@
           ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
         })();
+
 
     -#-----------------
     -#  GitHub ribbon

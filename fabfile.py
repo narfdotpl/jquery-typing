@@ -80,15 +80,30 @@ def demo():
     # copy compressed plugin
     local('cp {0} {1}'.format(COMPRESSED_PLUGIN_PATH, DEMO_DIR))
 
-    # copy style
-    reset = join(DEMO_SOURCE_DIR, 'reset.css')
-    output = join(DEMO_DIR, 'style.css')
-    local('cp {0} {1}'.format(reset, output))
+    # generate styles
+    demo_css()
 
     # render haml
     haml = join(DEMO_SOURCE_DIR, 'index.haml')
     html = join(DEMO_DIR, 'index.html')
     local('haml {0} > {1}'.format(haml, html))
+
+
+def demo_css():
+    """
+    Generate styles for demo.
+    """
+
+    # set paths
+    reset = join(DEMO_SOURCE_DIR, 'reset.css')
+    style = join(DEMO_SOURCE_DIR, 'style.sass')
+    output = join(DEMO_DIR, 'style.css')
+
+    # copy reset
+    local('cp {0} {1}'.format(reset, output))
+
+    # render sass
+    local('sass {0} >> {1}'.format(style, output))
 
 
 def deploy():
