@@ -14,14 +14,16 @@ from fabric.api import cd, env, local, put, run
 
 __author__ = 'Maciej Konieczny <hello@narf.pl>'
 
+VERSION = '0.2.0dev'
 
 REPO_DIR = dirname(realpath(__file__))
 DEMO_DIR = join(REPO_DIR, 'demo')
 PLUGIN_DIR = join(REPO_DIR, 'plugin')
 
 COMPILER_PATH = join(REPO_DIR, 'closure-compiler/compiler.jar')
-PLUGIN_PATH = join(PLUGIN_DIR, 'jquery.typing.js')
-COMPRESSED_PLUGIN_PATH = join(PLUGIN_DIR, 'jquery.typing.min.js')
+PLUGIN_PATH = join(PLUGIN_DIR, 'jquery.typing-{0}.js'.format(VERSION))
+COMPRESSED_PLUGIN_PATH = join(PLUGIN_DIR,
+                              'jquery.typing-{0}.min.js'.format(VERSION))
 
 
 env.hosts = ['narf.megiteam.pl']
@@ -40,6 +42,9 @@ def compress():
     """
     Create compressed version of the plugin.
     """
+
+    # remove old compressed version
+    _rm_min(PLUGIN_DIR)
 
     # compress
     local('java -jar {0} --js={1} --js_output_file={2}'.format(
@@ -67,6 +72,9 @@ def demo():
     """
     Build demo.
     """
+
+    # remove old compressed version
+    _rm_min(DEMO_DIR)
 
     # copy compressed plugin
     local('cp {0} {1}'.format(COMPRESSED_PLUGIN_PATH, DEMO_DIR))
@@ -124,3 +132,11 @@ def megi():
 
     # remove local archive
     local('rm ' + archive_path)
+
+
+def _rm_min(directory):
+    """
+    Remove compressed version in given directory.
+    """
+
+    local('rm {0}/jquery.typing*.min.js'.format(directory))
