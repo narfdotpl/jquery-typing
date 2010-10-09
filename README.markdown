@@ -43,7 +43,7 @@ Download
 --------
 
 Get production version from
-<http://narf.pl/jquery-typing/jquery.typing-0.2.0dev.min.js>
+<http://narf.pl/jquery-typing/jquery.typing-0.2.0.min.js>
 
 For development version visit [GitHub][].
 

@@ -1,6 +1,6 @@
 // jQuery-typing
 //
-// Version: 0.2.0dev
+// Version: 0.2.0
 // Website: http://narf.pl/jquery-typing/
 // License: public domain <http://unlicense.org/>
 // Author:  Maciej Konieczny <hello@narf.pl>

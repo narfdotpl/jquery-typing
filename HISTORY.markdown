@@ -7,8 +7,8 @@ for [full history][].
   [full history]: http://github.com/narfdotpl/jquery-typing/commits/master
 
 
-[v0.2dev][]
------------
+[v0.2][]
+--------
 
   - Added callback arguments support.  They are passed two things: event
     that caused callback execution and jQuery object for matched element.
@@ -22,5 +22,5 @@ for [full history][].
   - Initial release.
 
 
-  [v0.2dev]: http://github.com/narfdotpl/jquery-typing/compare/v0.1.0...master
+  [v0.2]: http://github.com/narfdotpl/jquery-typing/compare/v0.1.0...v0.2.0
   [v0.1]: http://github.com/narfdotpl/jquery-typing/compare/c4b8c10...v0.1.0

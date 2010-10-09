@@ -14,7 +14,7 @@ from fabric.api import cd, env, local, put, run
 
 __author__ = 'Maciej Konieczny <hello@narf.pl>'
 
-VERSION = '0.2.0dev'
+VERSION = '0.2.0'
 
 REPO_DIR = dirname(realpath(__file__))
 DEMO_DIR = join(REPO_DIR, 'demo')
