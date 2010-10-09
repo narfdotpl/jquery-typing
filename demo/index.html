@@ -4,6 +4,30 @@
     <meta content='text/html;charset=utf-8' http-equiv='content-type' />
     <title>jQuery-typing</title>
     <link href='style.css' rel='stylesheet' type='text/css' />
+    <script src='jquery-1.4.2.min.js' type='text/javascript'></script>
+    <script src='jquery.typing-0.2.0dev.min.js' type='text/javascript'></script>
+    <script type='text/javascript'>
+      //<![CDATA[
+        $(function () {
+          $('tbody tr').each(function (i, tr) {
+            var $tr = $(tr),
+                $input = $tr.find(':input'),
+                delay = $tr.find('.delay').text(),
+                $inProgress = $tr.find('.in-progress'),
+                $dot = $('<span class="bright">&#x25CF;</span>');
+        
+            $inProgress.empty();
+            $dot.appendTo($inProgress);
+        
+            $input.typing({
+              start: function () {$dot.removeClass('bright')},
+              stop: function () {$dot.addClass('bright')},
+              delay: delay
+            });
+          });
+        });
+      //]]>
+    </script>
   </head>
   <body>
     <script type='text/javascript'>
@@ -75,29 +99,5 @@
       <h2>Meta</h2>
       <p>jQuery-typing is written by <a href='http://narf.pl/'>Maciej Konieczny</a>. This software is released into the <a href='http://unlicense.org/'>public domain</a> and uses <a href='http://semver.org/'>semantic versioning</a> for release numbering.</p>
     </div>
-    <script src='jquery-1.4.2.min.js' type='text/javascript'></script>
-    <script src='jquery.typing-0.2.0dev.min.js' type='text/javascript'></script>
-    <script type='text/javascript'>
-      //<![CDATA[
-        $(function () {
-          $('tbody tr').each(function (i, tr) {
-            var $tr = $(tr),
-                $input = $tr.find(':input'),
-                delay = $tr.find('.delay').text(),
-                $inProgress = $tr.find('.in-progress'),
-                $dot = $('<span class="bright">&#x25CF;</span>');
-        
-            $inProgress.empty();
-            $dot.appendTo($inProgress);
-        
-            $input.typing({
-              start: function () {$dot.removeClass('bright')},
-              stop: function () {$dot.addClass('bright')},
-              delay: delay
-            });
-          });
-        });
-      //]]>
-    </script>
   </body>
 </html>

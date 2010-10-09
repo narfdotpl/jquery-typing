@@ -9,6 +9,34 @@
 
     %link(rel='stylesheet' href='style.css' type='text/css')
 
+
+    -#-----------
+    -#  scripts
+    -#-----------
+
+    %script(src='jquery-1.4.2.min.js' type='text/javascript')
+    %script(src='jquery.typing-#{version}.min.js' type='text/javascript')
+    :javascript
+      $(function () {
+        $('tbody tr').each(function (i, tr) {
+          var $tr = $(tr),
+              $input = $tr.find(':input'),
+              delay = $tr.find('.delay').text(),
+              $inProgress = $tr.find('.in-progress'),
+              $dot = $('<span class="bright">&#x25CF;</span>');
+
+          $inProgress.empty();
+          $dot.appendTo($inProgress);
+
+          $input.typing({
+            start: function () {$dot.removeClass('bright')},
+            stop: function () {$dot.addClass('bright')},
+            delay: delay
+          });
+        });
+      });
+
+
   %body
 
     -#--------------------
@@ -113,30 +141,3 @@
           [Maciej Konieczny]: http://narf.pl/
           [public domain]: http://unlicense.org/
           [semantic versioning]: http://semver.org/
-
-
-    -#-----------
-    -#  scripts
-    -#-----------
-
-    %script(src='jquery-1.4.2.min.js' type='text/javascript')
-    %script(src='jquery.typing-#{version}.min.js' type='text/javascript')
-    :javascript
-      $(function () {
-        $('tbody tr').each(function (i, tr) {
-          var $tr = $(tr),
-              $input = $tr.find(':input'),
-              delay = $tr.find('.delay').text(),
-              $inProgress = $tr.find('.in-progress'),
-              $dot = $('<span class="bright">&#x25CF;</span>');
-
-          $inProgress.empty();
-          $dot.appendTo($inProgress);
-
-          $input.typing({
-            start: function () {$dot.removeClass('bright')},
-            stop: function () {$dot.addClass('bright')},
-            delay: delay
-          });
-        });
-      });
